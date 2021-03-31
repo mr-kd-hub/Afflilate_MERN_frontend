@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,7 +15,7 @@ function Login() {
   const [fullname, setFullname] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [msg, setMessage] = useState();
+ 
 
   function onNameChange(obj) {
     setFullname(obj.target.value);
@@ -39,7 +39,7 @@ function Login() {
     axios
       .post('http://localhost:9000/api/signup', register)
       .then((res) => {
-        context.login(res.data);
+        context.login(res.data);//data sent to auth.js file
 
         if(res.data.success)
         {
@@ -69,7 +69,7 @@ function Login() {
         
       })
       .catch((err) => {
-        console.log('problem in signup');
+        console.log('problem in signup : '+err);
       });
 
     //field will be reset
@@ -108,7 +108,7 @@ function Login() {
         {
           localStorage.setItem('token', res.data.token);
           context.login(res.data);
-          history.push('/');
+          history.push('/');          
         } 
         else 
         {
@@ -126,7 +126,7 @@ function Login() {
         }
       })
       .catch((err) => {
-        console.log('problem in login');
+        console.log('problem in login : '+err);
       });
 
     //field will be reset

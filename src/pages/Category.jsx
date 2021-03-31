@@ -1,8 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function Category() {
+function Category()
+ {
+const [categoryData,setCategoryData] = useState([]);
+  let arr = [];
+
+
+  //ShowCategory called
+  useEffect(() => {
+    axios
+      .get("http://localhost:9000/api/showCategory")
+      .then((res) => {
+        console.log(res.data.user)
+        if (res.data.success) {
+          const Categorytitle = res.data.user;
+
+          // setCategoryData(res.data.user)
+
+          Categorytitle.map((category) => {
+            arr.push({"title":category.title,"image":category.image});
+           });
+        
+        }
+      })
+      .catch((err) => {
+        console.log("problem in login : " + err);
+      });
+  });
+  // console.log(arr);
+
+  //end
+
+  console.log(categoryData)
   return (
     <>
+
       {/* <!-- Start category Area --> */}
       <section className='category-area section-gap section-gap' id='catagory'>
         <div className='container'>
@@ -16,6 +51,9 @@ function Category() {
 
           <div className='row'>
             <div className='row category-bottom'>
+
+                    
+             
               {/* 1 */}
               <div className='col-lg-4 col-md-4 mb-30'>
                 <div className='content'>
@@ -27,7 +65,7 @@ function Category() {
                       alt=''
                     />
                     <div className='content-details fadeIn-bottom'>
-                      <h3 className='content-title'>Product for Women</h3>
+                      <h3 className='content-title'>YOur Title</h3>
                     </div>
                   </a>
                 </div>
@@ -44,7 +82,7 @@ function Category() {
                       alt=''
                     />
                     <div className='content-details fadeIn-bottom'>
-                      <h3 className='content-title'>Product for Couple</h3>
+                      <h3 className='content-title'>YOur Title</h3>
                     </div>
                   </a>
                 </div>
@@ -61,11 +99,13 @@ function Category() {
                       alt=''
                     />
                     <div className='content-details fadeIn-bottom'>
-                      <h3 className='content-title'>Product for Couple</h3>
+                      <h3 className='content-title'>YOur Title</h3>
                     </div>
                   </a>
                 </div>
               </div>
+
+              
             </div>
 
             {/* end row */}
@@ -75,5 +115,7 @@ function Category() {
       {/* <!-- End category Area --> */}
     </>
   );
+
+  
 }
 export default Category;

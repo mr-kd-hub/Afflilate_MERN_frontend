@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext,useHistory } from 'react';
+import { Redirect } from 'react-router';
+import { AuthContext } from '../context/auth';
 
 function Cart() {
+  const { user,logout } = useContext(AuthContext);
+   //const history = useHistory();
   return (
     <>
-      {/* <!-- Start Banner Area --> */}
+     {
+      user ? (
+        <>
+          {/* <!-- Start Banner Area --> */}
       <section className='banner-area organic-breadcrumb'>
         <div className='container'>
           <div className='breadcrumb-banner d-flex flex-wrap align-items-center'>
@@ -250,7 +257,15 @@ function Cart() {
         </div>
       </div>
       {/* <!-- End Cart Area --> */}
-    </>
+
+        </>
+      ) : (    
+        <>
+        <Redirect to={"/login"} />
+        </>        
+      )
+    }
+  </>
   );
 }
 export default Cart;

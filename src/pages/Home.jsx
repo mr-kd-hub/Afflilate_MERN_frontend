@@ -3,6 +3,7 @@ import Banner from './Banner'
 import Category from './Category'
 import NewProducts from './Newproduct'
 
+
 function Home()
 {
     return(<>

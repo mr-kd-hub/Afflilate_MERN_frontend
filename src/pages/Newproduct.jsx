@@ -1,8 +1,11 @@
 import React from 'react';
+import Webscrapping from './Webscrapping';
+
 
 function Newproduct() {
   return (
     <>
+    <Webscrapping />
       {/* <!-- Start men-product Area --> */}
       <section className='men-product-area section-gap relative' id='men'>
         <div className='overlay overlay-bg'></div>

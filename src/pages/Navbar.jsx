@@ -1,10 +1,19 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../context/auth';
-
+//protect route in laravel(autometic redirect)
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
+  // const history = useHistory();
   return (
     <>
+    {/* {
+      user ? (
+        <>User found</>
+      ) : (
+        
+        history.push("/login")
+      )
+    } */}
       <div id='header'>
         {/* <!-- Start Header Area --> */}
         <header className='default-header' id='header'>
