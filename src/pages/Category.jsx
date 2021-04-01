@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+const cssStyle ={
+    "float": "left",
+    "width":  "300px",
+    "height": "300px",
+    "object-fit": "cover"
+}
 function Category()
  {
-const [state, setState] = useState([])
-  let arr = [];
 
-
-  //ShowCategory called
+    const [state, setState] = useState([])
+ 
+//ShowCategory called
   useEffect(() => {
     axios
       .get("http://localhost:9000/api/showCategory")
@@ -52,8 +55,9 @@ const [state, setState] = useState([])
                         <div className='content-overlay'></div>
                         <img
                           className='content-image img-fluid d-block mx-auto'
-                          src='assets/img/c1.jpg'
+                          src={cardInfo.image}
                           alt=''
+                          style={cssStyle}
                         />
                         <div className='content-details fadeIn-bottom'>
                           <h3 className='content-title'>{cardInfo.title}</h3>

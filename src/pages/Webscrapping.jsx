@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-const request = require('request-promise');
+const request = require('request');
 const cheerio = require('cheerio');
 
 function Webscrapping()
