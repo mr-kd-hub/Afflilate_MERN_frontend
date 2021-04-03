@@ -11,7 +11,7 @@ function Webscrapping()
     .then((res) => {
       if(res.data.success)
       {
-            var url = res.data.user[0].flipkart_link;
+            var url = res.data.product[0].flipkart_link;
             console.log(url)
             //1
             axios
@@ -19,7 +19,8 @@ function Webscrapping()
             .then((res)=>{
               if(res)
               {
-                  const $ = cheerio.load(res.data); //all html code of that url 
+                console.log('successfull connection')
+                  //const $ = cheerio.load(res.data); //all html code of that url 
               }
               else
               {

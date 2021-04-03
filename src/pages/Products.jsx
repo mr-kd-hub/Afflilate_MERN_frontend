@@ -1,6 +1,33 @@
 import React from 'react';
 
 function Product() {
+  
+  axios
+    .get('http://localhost:9000/api/showProduct')
+    .then((res) => {
+      if(res.data.success)
+      {
+            var url = res.data.product[0].flipkart_link;
+            console.log(url)
+            //1
+            axios
+            .get(url)
+            .then((res)=>{
+              if(res)
+              {
+                console.log('successfull connection')
+                  //const $ = cheerio.load(res.data); //all html code of that url 
+              }
+              else
+              {
+                console.log('proble in connection')
+              }
+              //all html code of that url 
+            })
+            .catch((err)=>{
+              console.log('problem in Webscrapping : '+err);
+            });
+    
   return (
     <>
       {/* <!-- Start Banner Area --> */}
