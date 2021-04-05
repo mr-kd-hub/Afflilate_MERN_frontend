@@ -5,8 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Contact() {
-  const [namee, setName] = useState();
-  const [emaill, setEmail] = useState();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
   const [message, setMessage] = useState();
 
   function onNameChange(obj) {
@@ -21,19 +21,19 @@ function Contact() {
   function onSubmitt(obj) {
     obj.preventDefault();
     const detaill = {
-      name: namee,
-      email: emaill,
+      name: name,
+      email: email,
       message: message,
     };
     //contactAPI called
     axios
       .post('http://localhost:9000/api/contact', detaill)
       .then((res) => {
-        //console.log(res.data);
+        console.log(res.data);
         if(res.data.success)
         {
          // alert("done")
-          toast.success('Thank you For Writeing us...', {
+          toast.success(res.data.msg, {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
@@ -45,8 +45,8 @@ function Contact() {
         }
         else
          {
-           alert("not done")
-          toast.error('Problem In conatacting',
+         //  alert("not done")
+          toast.error(res.data.msg,
           {
            position: "top-center",
            autoClose: 5000,
@@ -62,7 +62,10 @@ function Contact() {
         console.log('problem in Contactup API CALLED'+err);
       });
 
-    window.location.reload();
+      setName('');
+      setEmail('');
+      setMessage('');
+    //window.location.reload();
   }
 
   return (
@@ -72,27 +75,26 @@ function Contact() {
         <div className='row'>
           <div className='col-lg-8 col-md-8 mx-auto'>
             <h3 className='mb-30'>Write Us</h3>
-            <form onSubmit={onSubmitt}>
+            <form onSubmit={onSubmitt} method="post">
 
               <div className='mt-10'>
                 <input
                   type='text'
-                  name='namee'
+                  name='name'
                   onChange={onNameChange}
-                  value={namee}
+                  value={name}
                   placeholder='Enter Name'
                   onfocus="this.placeholder = ''"
                   onblur="this.placeholder = 'First Name'"
-                  required
-                  className='single-input'/>
+                  className='single-input' required/>
               </div>
 
               <div className='mt-10'>
                 <input
                   type='email'
-                  name='emaill'
+                  name='email'
                   onChange={onEmailChange}
-                  value={emaill}
+                  value={email}
                   placeholder='Enter Email'
                   onfocus="this.placeholder = ''"
                   onblur="this.placeholder = 'First Name'"
@@ -109,7 +111,8 @@ function Contact() {
                   placeholder='Message'
                   onfocus="this.placeholder = ''"
                   onblur="this.placeholder = 'Message'"
-                  required></textarea>
+                  required
+                 ></textarea>
               </div>
 
               <div className='mt-10'>

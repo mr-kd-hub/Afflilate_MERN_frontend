@@ -1,33 +1,38 @@
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
+import axios from 'axios';
+import ReactPaginate from 'react-paginate';
+const cssStyle={
+  width:'120px',height:'240px'
+}
+function Products() { 
+  const [state, setState] = useState([])
+  const [pages,setPages] = useState([]) 
 
-function Product() {
   
-  axios
-    .get('http://localhost:9000/api/showProduct')
+  useEffect(()=>{
+    axios
+    .get("http://localhost:9000/api/showProduct")
     .then((res) => {
-      if(res.data.success)
+     // console.log(res.data)
+      if (res.data.msg==="Success") 
       {
-            var url = res.data.product[0].flipkart_link;
-            console.log(url)
-            //1
-            axios
-            .get(url)
-            .then((res)=>{
-              if(res)
-              {
-                console.log('successfull connection')
-                  //const $ = cheerio.load(res.data); //all html code of that url 
-              }
-              else
-              {
-                console.log('proble in connection')
-              }
-              //all html code of that url 
-            })
-            .catch((err)=>{
-              console.log('problem in Webscrapping : '+err);
-            });
-    
+       
+        setState(res.data.product)
+          var total = state.length+0.50;
+        setPages(Math.ceil(total / 12) )      
+        
+      }
+    })
+    .catch((err) => {
+      console.log("problem in login : " + err);
+    });
+  },[])
+ 
+  function handlePageClick()
+  {
+
+  }
+
   return (
     <>
       {/* <!-- Start Banner Area --> */}
@@ -35,12 +40,12 @@ function Product() {
         <div className='container'>
           <div className='breadcrumb-banner d-flex flex-wrap align-items-center'>
             <div className='col-first'>
-              <h1>Shop Category page</h1>
+              <h1>Shop Products</h1>
               <nav className='d-flex align-items-center justify-content-start'>
-                <a href='/home'>
+                <a href='/'>
                   Home<i className='fa fa-caret-right' aria-hidden='true'></i>
                 </a>
-                <a href='category.html'>Fashon Category</a>
+                <a href='/product'>Products</a>
               </nav>
             </div>
           </div>
@@ -49,169 +54,62 @@ function Product() {
       {/* <!-- End Banner Area --> */}
       <div className='container'>
         <div className='row'>
-          <div className='col-xl-9 col-lg-8 col-md-7'>
-            {/* <!-- Start Filter Bar --> */}
-            <div className='filter-bar d-flex flex-wrap align-items-center'>
-              <a href='#' className='grid-btn active'>
-                <i className='fa fa-th' aria-hidden='true'></i>
-              </a>
-              <a href='#' className='list-btn'>
-                <i className='fa fa-th-list' aria-hidden='true'></i>
-              </a>
-              <div className='sorting'>
-                <select>
-                  <option value='1'>Default sorting</option>
-                  <option value='1'>Default sorting</option>
-                  <option value='1'>Default sorting</option>
-                </select>
-              </div>
-              <div className='sorting mr-auto'>
-                <select>
-                  <option value='1'>Show 12</option>
-                  <option value='1'>Show 12</option>
-                  <option value='1'>Show 12</option>
-                </select>
-              </div>
+          <div className='col-sm-12'>
+            
+            {/* <!-- Start pagination  --> */}
+            <div className='filter-bar d-flex flex-wrap align-items-center'>          
               <div className='pagination'>
-                <a href='#' className='prev-arrow'>
+                {/* <ReactPaginate 
+                    previousLabel={"Prev"}
+                    nextLabel={"Next"}
+                    breakLabel={"..."}
+                    breakClassName={"break-me"}
+                    pageCount={pages}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageClick}
+                    containerClassName={"pagination"}
+                    activeClassName={"active"}/> */}
+                {/* <a href='#' className='prev-arrow'>
                   <i className='fa fa-long-arrow-left' aria-hidden='true'></i>
                 </a>
-                <a href='#' className='active'>
-                  1
-                </a>
-                <a href='#'>2</a>
-                <a href='#'>3</a>
-                <a href='#' className='dot-dot'>
-                  <i className='fa fa-ellipsis-h' aria-hidden='true'></i>
-                </a>
-                <a href='#'>6</a>
-                <a href='#' className='next-arrow'>
-                  <i className='fa fa-long-arrow-right' aria-hidden='true'></i>
-                </a>
+                */}
+
               </div>
             </div>
-            {/* <!-- End Filter Bar --> */}
+            {/* <!-- End pagination  --> */}
 
+          </div>
+        </div>
             <section className='lattest-product-area pb-40 category-list'>
               <div className='row'>
-                {/* 1 */}
-                <div className='col-xl-4 col-lg-6 col-md-12 col-sm-6 single-product'>
-                  <div className='content'>
-                    <div className='content-overlay'></div>
-                    <img
-                      className='content-image img-fluid d-block mx-auto'
-                      src='assets/img/l5.jpg'
-                      alt=''
-                    />
-                    <div className='content-details fadeIn-bottom'>
-                      <div className='bottom d-flex align-items-center justify-content-center'>
-                        <a href='#'>
-                          <span className='lnr lnr-heart'></span>
-                        </a>
-                        <a href='#'>
-                          <span className='lnr lnr-layers'></span>
-                        </a>
-                        <a href='#'>
-                          <span className='lnr lnr-cart'></span>
-                        </a>
-                        <a
-                          href='#'
-                          data-toggle='modal'
-                          data-target='#exampleModal'
-                        >
-                          <span className='lnr lnr-frame-expand'></span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='price'>
-                    <h5>Long Sleeve shirt</h5>
-                    <h3>$150.00</h3>
-                  </div>
-                </div>
-
-                {/* 2 */}
-                <div className='col-xl-4 col-lg-6 col-md-12 col-sm-6 single-product'>
-                  <div className='content'>
-                    <div className='content-overlay'></div>
-                    <img
-                      className='content-image img-fluid d-block mx-auto'
-                      src='assets/img/l6.jpg'
-                      alt=''
-                    />
-                    <div className='content-details fadeIn-bottom'>
-                      <div className='bottom d-flex align-items-center justify-content-center'>
-                        <a href='#'>
-                          <span className='lnr lnr-heart'></span>
-                        </a>
-                        <a href='#'>
-                          <span className='lnr lnr-layers'></span>
-                        </a>
-                        <a href='#'>
-                          <span className='lnr lnr-cart'></span>
-                        </a>
-                        <a
-                          href='#'
-                          data-toggle='modal'
-                          data-target='#exampleModal'
-                        >
-                          <span className='lnr lnr-frame-expand'></span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='price'>
-                    <h5>Long Sleeve shirt</h5>
-                    <h3>$150.00</h3>
-                  </div>
-                </div>
+                      {   
+                          state && state.slice(0, 12).map((cardInfo,index)=>{
+                            //console.log(cardInfo)
+                            return (
+                              <>    
+                                  <div className='col-xl-3 single-product'>
+                                      <div className='content'>
+                                           <div className='content-overlay'></div>
+                                              <iframe 
+                                                 className="img-fluid d-block mx-auto"
+                                                style={cssStyle}
+                                                src={cardInfo.flipkart_link}>
+                                              </iframe>    
+                                      </div>
+                                  </div>
+                            </>
+                            )
+                          })
+                      }
               </div>
             </section>
 
-            <div className='col-xl-3 col-lg-4 col-md-5'>
-              <div className='sidebar-categories'>
-                <div className='head'>Browse Categories</div>
-                <ul className='main-categories'>
-                  <li className='main-nav-list'>
-                    <a
-                      data-toggle='collapse'
-                      href='#fruitsVegetable'
-                      aria-expanded='false'
-                      aria-controls='fruitsVegetable'
-                    >
-                      <span className='lnr lnr-arrow-right'></span>Fruits and
-                      Vegetables<span className='number'>(53)</span>
-                    </a>
-                  </li>
-                  <li className='main-nav-list'>
-                    <a
-                      data-toggle='collapse'
-                      href='#fruitsVegetable'
-                      aria-expanded='false'
-                      aria-controls='fruitsVegetable'
-                    >
-                      <span className='lnr lnr-arrow-right'></span>Fruits and
-                      Vegetables<span className='number'>(53)</span>
-                    </a>
-                  </li>
-                  <li className='main-nav-list'>
-                    <a
-                      data-toggle='collapse'
-                      href='#fruitsVegetable'
-                      aria-expanded='false'
-                      aria-controls='fruitsVegetable'
-                    >
-                      <span className='lnr lnr-arrow-right'></span>Fruits and
-                      Vegetables<span className='number'>(53)</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+         
+
+        
       </div>
     </>
   );
-}
-export default Product;
+  }
+export default Products;

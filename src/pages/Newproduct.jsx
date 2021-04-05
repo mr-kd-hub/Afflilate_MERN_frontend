@@ -1,12 +1,30 @@
-import React from 'react';
-import Webscrapping from './Webscrapping';
+import React,{ useEffect, useState } from 'react';
+import axios from 'axios';
 
 
-function Newproduct() {
+const cssStyle={
+  width:'120px',height:'240px'
+}
+function Newproduct() 
+{
+  const [state, setState] = useState([])
+  useEffect(()=>{
+    axios
+    .get("http://localhost:9000/api/showProduct")
+    .then((res) => {
+     // console.log(res.data)
+      if (res.data.msg==="Success") {
+        setState(res.data.product)
+      }
+    })
+    .catch((err) => {
+      console.log("problem in login : " + err);
+    });
+  },[])
+  
   return (
     <>
-    <Webscrapping />
-      {/* <!-- Start men-product Area --> */}
+     {/* <!-- Start men-product Area --> */}
       <section className='men-product-area section-gap relative' id='men'>
         <div className='overlay overlay-bg'></div>
         <div className='container'>
@@ -22,47 +40,39 @@ function Newproduct() {
               </div>
             </div>
           </div>
-          <div className='row'>
-            <div className='col-lg-3 col-md-6 single-product'>
-              <div className='content'>
-                <div className='content-overlay'></div>
-                <img
-                  className='content-image img-fluid d-block mx-auto'
-                  src='assets/img/l1.jpg'
-                  alt=''
-                />
-                <div className='content-details fadeIn-bottom'>
-                  <div className='bottom d-flex align-items-center justify-content-center'>
-                    <a href='#'>
-                      <span className='lnr lnr-heart'></span>
-                    </a>
-                    <a href='#'>
-                      <span className='lnr lnr-layers'></span>
-                    </a>
-                    <a href='#'>
-                      <span className='lnr lnr-cart'></span>
-                    </a>
-                    <a href='#' data-toggle='modal' data-target='#exampleModal'>
-                      <span className='lnr lnr-frame-expand'></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className='price'>
-                <h5 className='text-white'>Long Sleeve shirt</h5>
-                <h3 className='text-white'>$150.00</h3>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-6 single-product'>
+          <div className='row mx-2'>
+          {   
+              state && state.slice(0, 6).map((cardInfo,index)=>{
+                console.log(cardInfo)
+                return (
+                  <>    
+                      <div className='col-sm-2 single-product'>
+                        {/* <div className='bottom d-flex align-items-center justify-content-center'> */}
+                        <div className='content-overlay'></div>
+                          <iframe 
+                          className="img-fluid d-block mx-auto"
+                            style={cssStyle}
+                            src={cardInfo.flipkart_link}>
+                          </iframe>    
+                        {/* </div>      */}
+                      </div>      
+                      
+                </>
+                )
+              })
+            }
+
+            {/* 2 */}
+            {/* <div className='col-lg-3 col-md-6 single-product'>
               <div className='content'>
                 <div className='content-overlay'></div>
                 <img
                   className='content-image img-fluid d-block mx-auto'
                   src='assets/img/l2.jpg'
                   alt=''
-                />
-                <div className='content-details fadeIn-bottom'>
-                  <div className='bottom d-flex align-items-center justify-content-center'>
+                /> */}
+                {/* <div className='content-details fadeIn-bottom'> */}
+                  {/* <div className='bottom d-flex align-items-center justify-content-center'>
                     <a href='#'>
                       <span className='lnr lnr-heart'></span>
                     </a>
@@ -75,45 +85,23 @@ function Newproduct() {
                     <a href='#' data-toggle='modal' data-target='#exampleModal'>
                       <span className='lnr lnr-frame-expand'></span>
                     </a>
-                  </div>
-                </div>
+                  </div> */}
+                {/* </div>
               </div>
-              <div className='price'>
-                <h5 className='text-white'>Long Sleeve shirt</h5>
-                <h3 className='text-white'>$150.00</h3>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-6 single-product'>
+              
+            </div> */}
+
+            {/* 3 */}
+            {/* <div className='col-lg-3 col-md-6 single-product'>
               <div className='content'>
                 <div className='content-overlay'></div>
-                <img
-                  className='content-image img-fluid d-block mx-auto'
-                  src='assets/img/l3.jpg'
-                  alt=''
-                />
-                <div className='content-details fadeIn-bottom'>
-                  <div className='bottom d-flex align-items-center justify-content-center'>
-                    <a href='#'>
-                      <span className='lnr lnr-heart'></span>
-                    </a>
-                    <a href='#'>
-                      <span className='lnr lnr-layers'></span>
-                    </a>
-                    <a href='#'>
-                      <span className='lnr lnr-cart'></span>
-                    </a>
-                    <a href='#' data-toggle='modal' data-target='#exampleModal'>
-                      <span className='lnr lnr-frame-expand'></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className='price'>
-                <h5 className='text-white'>Long Sleeve shirt</h5>
-                <h3 className='text-white'>$150.00</h3>
-              </div>
-            </div>
-            <div className='col-lg-3 col-md-6 single-product'>
+               
+                
+              </div>              
+            </div> */}
+
+            {/* 4 */}
+            {/* <div className='col-lg-3 col-md-6 single-product'>
               <div className='content'>
                 <div className='content-overlay'></div>
                 <img
@@ -143,11 +131,12 @@ function Newproduct() {
                 <h3 className='text-white'>$150.00</h3>
               </div>
             </div>
+ */}
+
           </div>
         </div>
       </section>
       {/* <!-- End men-product Area --> */}
-    </>
-  );
+    </>);
 }
 export default Newproduct;

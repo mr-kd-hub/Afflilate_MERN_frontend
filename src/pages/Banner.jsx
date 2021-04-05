@@ -1,12 +1,25 @@
 import React from 'react';
+import {Helmet} from "react-helmet";
 var cssStyle = {
   size: 'flex',
 };
 
 function Banner() {
+  
   return (
     <>
-      {/* <!-- start banner Area --> */}
+    
+    {/* <Helmet>
+    <script type="text/javascript" language="javascript">
+          var aax_size='728x90';
+          var aax_pubname = 'zoddok-21';
+          var aax_src='302';
+        </script>
+        <script type="text/javascript" language="javascript" src="http://c.amazon-adsystem.com/aax2/assoc.js"></script>
+    
+    </Helmet> */}
+
+     {/* <!-- start banner Area --> */}
       <section className='banner-area relative' id='home'>
         <div className='container-fluid'>
           <div className='row fullscreen align-items-center justify-content-center'>
@@ -25,6 +38,7 @@ function Banner() {
                 It’s Happening <br />
                 this Season!
               </h1>
+              <img alt="Amazon logo PNG" class="n3VNCb" src="http://pngimg.com/uploads/amazon/amazon_PNG13.png" data-noaft="1" jsname="HiaYvf" jsaction="load:XAeZkd;" style={{width: "200px", height: "150.75px"}}/>
             </div>
           </div>
         </div>

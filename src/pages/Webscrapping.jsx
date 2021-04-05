@@ -84,4 +84,4 @@ function Webscrapping()
    return(<></>)
 }
 
-export default Webscrapping;
+//export default Webscrapping;

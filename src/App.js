@@ -10,6 +10,8 @@ import Error from './pages/Error';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Account from './pages/Account';
+import Allcategories from './pages/Allcategories';
+import Products from './pages/Products';
 import { AuthProvider } from './context/auth';
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
           <Route exact path='/cart' component={Cart} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/account' component={Account} />
+          <Route exact path='/category' component={Allcategories} />
+          <Route exact path='/product' component={Products} />
           <Route component={Error} />
         </Switch>
       </AuthProvider>
