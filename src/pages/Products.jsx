@@ -11,7 +11,7 @@ function Products() {
   
   useEffect(()=>{
     axios
-    .get("http://localhost:9000/api/showProduct")
+    .get("http://localhost:9000/api/showAllProduct")
     .then((res) => {
      // console.log(res.data)
       if (res.data.msg==="Success") 
