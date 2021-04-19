@@ -14,6 +14,7 @@ function Navbar() {
         history.push("/login")
       )
     } */}
+
       <div id='header'>
         {/* <!-- Start Header Area --> */}
         <header className='default-header' id='header'>
@@ -25,8 +26,8 @@ function Navbar() {
                     <a href='tel:+12312-3-1209'>+12312-3-1209</a>
                   </li>
                   <li>
-                    <a href='mailto:support@colorlib.com'>
-                      support@colorlib.com
+                    <a href='zoddoks@gmail.com'>
+                    zoddoks@gmail.com
                     </a>
                   </li>
                 </ul>

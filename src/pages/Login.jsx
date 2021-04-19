@@ -9,8 +9,9 @@ import { AuthContext } from '../context/auth';
 
 function Login() {
   const context = useContext(AuthContext);
-
   const history = useHistory();
+
+  
   //signup
   const [fullname, setFullname] = useState();
   const [email, setEmail] = useState();

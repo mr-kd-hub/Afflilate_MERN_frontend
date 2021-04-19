@@ -3,13 +3,14 @@ import { Redirect } from 'react-router';
 import { AuthContext } from '../context/auth';
 
 function Cart() {
-  const { user,logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
    //const history = useHistory();
   return (
     <>
      {
       user ? (
         <>
+            
           {/* <!-- Start Banner Area --> */}
       <section className='banner-area organic-breadcrumb'>
         <div className='container'>
@@ -261,7 +262,7 @@ function Cart() {
         </>
       ) : (    
         <>
-        <Redirect to={"/login"} />
+          <Redirect to={"/login"} />
         </>        
       )
     }
