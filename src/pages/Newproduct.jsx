@@ -43,8 +43,7 @@ function Newproduct()
           <div className='row mx-2'>
           {   
               state && state.slice(0, 6).map((cardInfo,index)=>{
-                console.log(cardInfo)
-                return (
+                  return (
                   <>    
                       <div className='col-sm-2 single-product'>
                         {/* <div className='bottom d-flex align-items-center justify-content-center'> */}
