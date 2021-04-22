@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
 //protect route in laravel(autometic redirect)
 function Navbar() {
@@ -34,11 +35,11 @@ function Navbar() {
                 <ul className='list'>
                   <li>
                     {user ? (
-                      <a href='/' onClick={logout}>
+                      <Link to='/' onClick={logout}>
                         logout
-                      </a>
+                      </Link>
                     ) : (
-                      <a href='/login'>signUp/login</a>
+                      <Link to='/login'>signUp/login</Link>
                     )}
                   </li>
                 </ul>
@@ -67,22 +68,22 @@ function Navbar() {
               >
                 <ul className='navbar-nav'>
                   <li>
-                    <a href='/'>Home</a>
+                    <Link to='/'>Home</Link>
                   </li>
                   <li>
-                    <a href='/category'>Category</a>
+                    <Link to='/category'>Category</Link>
                   </li>
                   <li>
-                    <a href='/product'>Product</a>
+                    <Link to='/product'>Product</Link>
                   </li>
                   <li>
-                    <a href='/about'>About Us</a>
+                    <Link to='/about'>About Us</Link>
                   </li>
                   <li>
-                    <a href='/contact'>Contact us</a>
+                    <Link to='/contact'>Contact us</Link>
                   </li>
                   <li>
-                    <a href='/cart'>My Cart</a>
+                    <Link to='/cart'>My Cart</Link>
                   </li>
                 </ul>
               </div>
