@@ -1,8 +1,30 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext,useEffect,useState } from 'react';
+
 var cssstyle = {
   position: 'absolute; left: -5000px',
 };
 function Footer() {
+  const [aboutus,setAboutus] = useState()
+  const [instagram,setInstagram] = useState()
+  const [facebook,setFacebook] = useState()
+  const [twitter,setTwitter] = useState()
+  
+  
+  useEffect(() => {
+    
+    axios.get("http://localhost:9000/api/showSite/608535172fc387321482365e")
+    .then((res)=>{
+        const  { instagram, facebook, twitter, aboutus1 } = res.data.setting[0];
+        setAboutus(aboutus1)
+        setInstagram(instagram)
+        setFacebook(facebook)
+        setTwitter(twitter)
+    })
+    .catch((err)=>{
+
+    })
+  }, [])
   return (
     <>
       {/* <!-- start footer Area -->		 */}
@@ -12,9 +34,8 @@ function Footer() {
             <div className='col-lg-3  col-md-6 col-sm-6'>
               <div className='single-footer-widget'>
                 <h6>About Us</h6>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore dolore magna aliqua.
+                <p style={{"text-overflow" : "ellipsis", overflow:"hidden","max-height": "3.6em"}}>
+                  {aboutus}
                 </p>
               </div>
             </div>
@@ -47,14 +68,7 @@ function Footer() {
                           aria-hidden='true'
                         ></i>
                       </button>
-                      <div style={cssstyle}>
-                        <input
-                          name='b_36c4fd991d266f23781ded980_aefe40901a'
-                          tabindex='-1'
-                          value=''
-                          type='text'
-                        />
-                      </div>
+                      
                     </div>
                     <div className='info'></div>
                   </form>
@@ -97,18 +111,16 @@ function Footer() {
                 <h6>Follow Us</h6>
                 <p>Let us be social</p>
                 <div className='footer-social d-flex align-items-center'>
-                  <a href='#'>
+                  <a href={facebook}>
                     <i className='fa fa-facebook'></i>
                   </a>
-                  <a href='#'>
+                  <a href={twitter}>
                     <i className='fa fa-twitter'></i>
                   </a>
-                  <a href='#'>
-                    <i className='fa fa-dribbble'></i>
+                  <a href={instagram}>
+                    <i className='fa fa-instagram'></i>
                   </a>
-                  <a href='#'>
-                    <i className='fa fa-behance'></i>
-                  </a>
+                 
                 </div>
               </div>
             </div>

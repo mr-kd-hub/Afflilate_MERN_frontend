@@ -44,13 +44,22 @@ function Products() {
       <div className="container">
         
         <section className="lattest-product-area pb-40 category-list">
+        <div className='row d-flex justify-content-center'>
+            <div className='menu-content pb-40'>
+              <div className='title text-center'>
+                <h1 className='mb-10'>Everey Thing You Looking For Is Here...</h1>
+              </div>
+            </div>
+          </div>
            <div className="row mx-3">
             {
             state &&  state.slice(0, 12).map((cardInfo, index) => {
                 
                 return (
                   <>
+                  
                     <div className="col-sm-2 single-product">
+                    <div class="bg-image hover-zoom" data-mdb-ripple-color="light">
                       <div className="content-overlay"></div>
                       <iframe
                         style={cssStyle}
@@ -61,6 +70,7 @@ function Products() {
                         className="img-fluid d-block mx-auto"
                         src={cardInfo.flipkart_link.toString()}
                       ></iframe>
+                    </div>
                     </div>
                   </>
                 );

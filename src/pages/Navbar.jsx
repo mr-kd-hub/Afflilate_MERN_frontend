@@ -1,22 +1,28 @@
-import React, { useContext } from 'react';
+import axios from 'axios';
+import React, { useContext,useEffect,useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
 //protect route in laravel(autometic redirect)
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
+  const [mobile,setMobile] = useState()
+  const [email,setEmail] = useState()
   // const history = useHistory();
+  useEffect(() => {
+    
+    axios.get("http://localhost:9000/api/showSite/608535172fc387321482365e")
+    .then((res)=>{
+        const  { email, mobile } = res.data.setting[0];
+        setEmail(email)
+        setMobile(mobile)
+    })
+    .catch((err)=>{
+
+    })
+  }, [])
   return (
     <>
-    {/* {
-      user ? (
-        <>User found</>
-      ) : (
-        
-        history.push("/login")
-      )
-    } */}
-
-      <div id='header'>
+     <div id='header'>
         {/* <!-- Start Header Area --> */}
         <header className='default-header' id='header'>
           <div className='menutop-wrap'>
@@ -24,11 +30,11 @@ function Navbar() {
               <div className='d-flex justify-content-between align-items-center'>
                 <ul className='list'>
                   <li>
-                    <a href='tel:+12312-3-1209'>+12312-3-1209</a>
+                    <a href='tel:+12312-3-1209'>{mobile}</a>
                   </li>
                   <li>
                     <a href='zoddoks@gmail.com'>
-                    zoddoks@gmail.com
+                    {email}
                     </a>
                   </li>
                 </ul>
